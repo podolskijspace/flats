@@ -10,6 +10,19 @@ const reducer = (state = initialState, action) => {
         data: action.payload,
       };
 
+    case 'ON_LIKE':
+      return {
+        ...state,
+        data: state.data.map(item => {
+          if (item.id === action.payload) {
+            item.liked = !item.liked
+          }
+          return item
+        })
+      };
+
+
+
     default:
       return state;
   }

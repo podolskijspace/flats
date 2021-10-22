@@ -1,11 +1,13 @@
 import {useState, useEffect } from "react";
 import { connect } from "react-redux";
+import {onLike} from "../../actions/index";
+
 import Container from "../../components/container/Container";
 import Flat from "../../components/flat/Flat";
 
 
 
-const Main = ({data}) => {
+const Main = ({data, onLike}) => {
   const [result, setResult] = useState([]);
   const mapData = () => {
     setResult(data.map(item => {
@@ -14,7 +16,7 @@ const Main = ({data}) => {
       const {first_name, last_name, middle_name} = item.relationships.attributes
 
       const onLiked = () => {
-        console.log(item.id)
+        onLike(item.id)
       }
 
       return (
@@ -27,6 +29,7 @@ const Main = ({data}) => {
           area={`${area} ${unit}`}
           agent={`${last_name} ${first_name} ${middle_name}`}
           onLiked={onLiked}
+          liked={item.liked}
           />
         </li>
       )
@@ -52,7 +55,7 @@ const mstp = ({data}) => {
 }
 
 const mdtp = {
-  
+  onLike
 }
 
 export default connect(mstp, mdtp)(Main);

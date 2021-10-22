@@ -1,6 +1,6 @@
-const Flat = ({onLiked, title, city, address, agent, area, rooms}) => {
+const Flat = ({onLiked, title, city, address, agent, area, rooms, liked}) => {
   return (
-    <div className="flat">
+    <div className={`flat${liked ? ' liked' : ''}`}>
       <p className="flat__title">
         {title}
       </p>
